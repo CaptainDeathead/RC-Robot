@@ -14,18 +14,22 @@ run = True
 def forward():
     pins.output(2, pins.HIGH)
     pins.output(3, pins.HIGH)
+    print("Forward")
 
 def backward():
     pins.output(2, pins.LOW)
     pins.output(3, pins.LOW)
+    print("Backward")
 
 def left():
     pins.output(2, pins.HIGH)
     pins.output(3, pins.LOW)
+    print("Left")
 
 def right():
     pins.output(2, pins.LOW)
     pins.output(3, pins.HIGH)
+    print("Right")
 
 print("Press 'E' to exit!\nRunning...")
 
