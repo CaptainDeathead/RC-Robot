@@ -48,5 +48,7 @@ while run == True:
         left()
     elif keys[pygame.K_d]:
         right()
+    elif keys[pygame.K_e]:
+        run = False
 
     pygame.time.Clock().tick(60)
