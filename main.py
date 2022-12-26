@@ -1,4 +1,4 @@
-import GPIO as pins
+import RPi.GPIO as pins
 import pygame
 
 # set up pins 2 and 3 as outputs
