@@ -52,3 +52,5 @@ while run == True:
         run = False
 
     pygame.time.Clock().tick(60)
+
+pins.cleanup()
