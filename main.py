@@ -59,6 +59,4 @@ while run == True:
     elif keys[pygame.K_e]:
         run = False
 
-    pygame.time.Clock().tick(5)
-
 pins.cleanup()
