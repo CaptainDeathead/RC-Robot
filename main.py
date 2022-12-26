@@ -27,6 +27,8 @@ def right():
     pins.output(2, pins.LOW)
     pins.output(3, pins.HIGH)
 
+print("Press 'E' to exit!\nRunning...")
+
 while run == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
