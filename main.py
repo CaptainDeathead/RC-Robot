@@ -1,6 +1,8 @@
 import RPi.GPIO as pins
 import pygame
 
+pins.setmode(pins.BCM)
+
 # set up pins 2 and 3 as outputs
 pins.setup(2, pins.OUT)
 pins.setup(3, pins.OUT)
