@@ -37,7 +37,7 @@ def right():
 
 print("Press 'E' to exit!\nRunning...")
 
-def input():
+def get_input():
     while True:
         key = input()[0]
         if key == "w":
@@ -51,6 +51,6 @@ def input():
         elif key == "e":
             break
 
-tk.Thread(target=input).start()
+tk.Thread(target=get_input).start()
 
 pins.cleanup()
