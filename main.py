@@ -1,6 +1,7 @@
 import RPi.GPIO as pins
 import threading as tk
 import flask
+import pygame
 
 pins.setmode(pins.BCM)
 
@@ -36,11 +37,6 @@ def right():
     pins.output(2, pins.LOW)
     pins.output(3, pins.LOW)
 
-def close():
-    pins.cleanup()
-    print("Exiting")
-    exit()
-
 print("Press 'E' to exit!\nRunning...")
 
 def connect_to_mobile():
@@ -64,9 +60,6 @@ def connect_to_mobile():
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
         </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
-        </form>
         """
     @app.route('/handle_forward', methods=['POST'])
     def handle_forward():
@@ -88,10 +81,6 @@ def connect_to_mobile():
         </form>
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
-        </form>
-        </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
         </form>
         """
     @app.route('/handle_backward', methods=['POST'])
@@ -115,10 +104,6 @@ def connect_to_mobile():
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
         </form>
-        </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
-        </form>
         """
     @app.route('/handle_left', methods=['POST'])
     def handle_left():
@@ -141,10 +126,6 @@ def connect_to_mobile():
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
         </form>
-        </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
-        </form>
         """
     @app.route('/handle_right', methods=['POST'])
     def handle_right():
@@ -166,10 +147,6 @@ def connect_to_mobile():
         </form>
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
-        </form>
-        </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
         </form>
         """
     @app.route('/handle_stop', methods=['POST'])
@@ -194,19 +171,22 @@ def connect_to_mobile():
         <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
         </form>
-        </form>
-        <form action="/handle_exit" method="post">
-        <input type="submit" value="Exit">
-        </form>
         """
-    @app.route('/handle_exit', methods=['POST'])
-    def handle_exit():
-        close()
 
     host = '192.168.0.240'
 
     app.run(host = host, port = 7045)
 
+def get_key():
+    pygame.init()
+
+    while True:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_e]:
+            pins.cleanup()
+            exit()
+
+tk.Thread(target = connect_to_mobile).start()
 connect_to_mobile()
 
 pins.cleanup()
