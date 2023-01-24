@@ -44,40 +44,40 @@ def connect_to_mobile():
     def home():
         return """<h1>Welcome to rovo 1.0 control panel</h1>
         <h2>Use the buttons below to control the robot</h2>
-        <form action="/forward" method="post">
+        <form action="/handle_forward" method="post">
         <input type="submit" value="Forward">
         </form>
-        <form action="/backward" method="post">
+        <form action="/handle_backward" method="post">
         <input type="submit" value="Backward">
         </form>
-        <form action="/left" method="post">
+        <form action="/handle_left" method="post">
         <input type="submit" value="Left">
         </form>
-        <form action="/right" method="post">
+        <form action="/handle_right" method="post">
         <input type="submit" value="Right">
         </form>
-        <form action="/stop" method="post">
+        <form action="/handle_stop" method="post">
         <input type="submit" value="Stop">
         </form>
         """
-    @app.route('/forward', methods=['POST'])
-    def forward():
+    @app.route('/handle_forward', methods=['POST'])
+    def handle_forward():
         forward()
-        return "Home"
-    @app.route('/backward', methods=['POST'])
-    def backward():
+        return "Forward"
+    @app.route('/handle_backward', methods=['POST'])
+    def handle_backward():
         backward()
         return "Backward"
-    @app.route('/left', methods=['POST'])
-    def left():
+    @app.route('/handle_left', methods=['POST'])
+    def handle_left():
         left()
         return "Left"
-    @app.route('/right', methods=['POST'])
-    def right():
+    @app.route('/handle_right', methods=['POST'])
+    def handle_right():
         right()
         return "Right"
-    @app.route('/stop', methods=['POST'])
-    def stop():
+    @app.route('/handle_stop', methods=['POST'])
+    def handle_stop():
         pins.output(2, pins.LOW)
         pins.output(3, pins.LOW)
         return "Stop"
