@@ -1,7 +1,5 @@
 import RPi.GPIO as pins
-import threading as tk
 import flask
-import pygame
 
 pins.setmode(pins.BCM)
 
@@ -177,16 +175,6 @@ def connect_to_mobile():
 
     app.run(host = host, port = 7045)
 
-def get_key():
-    pygame.init()
-
-    while True:
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_e]:
-            pins.cleanup()
-            exit()
-
-tk.Thread(target = connect_to_mobile).start()
 connect_to_mobile()
 
 pins.cleanup()
