@@ -1,5 +1,6 @@
 import RPi.GPIO as pins
 import threading as tk
+import time
 
 pins.setmode(pins.BCM)
 
@@ -51,6 +52,7 @@ def get_input():
         elif key == "e":
             break
 
+time.sleep(1)
 tk.Thread(target=get_input).start()
 
 pins.cleanup()
