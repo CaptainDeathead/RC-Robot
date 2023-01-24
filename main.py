@@ -86,4 +86,6 @@ def connect_to_mobile():
 
     app.run(host = host, port = 7045)
 
+connect_to_mobile()
+
 pins.cleanup()
