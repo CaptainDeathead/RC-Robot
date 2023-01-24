@@ -199,7 +199,7 @@ def connect_to_mobile():
         <input type="submit" value="Exit">
         </form>
         """
-    @app.route('/exit', methods=['POST'])
+    @app.route('/handle_exit', methods=['POST'])
     def handle_exit():
         close()
 
