@@ -1,15 +1,11 @@
 import RPi.GPIO as pins
-import pygame
+import threading as tk
 
 pins.setmode(pins.BCM)
 
 # set up pins 2 and 3 as outputs
 pins.setup(2, pins.OUT)
 pins.setup(3, pins.OUT)
-
-pygame.init()
-
-run = True
 
 def forward():
     pins.output(2, pins.HIGH)
@@ -41,22 +37,20 @@ def right():
 
 print("Press 'E' to exit!\nRunning...")
 
-while run == True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+def input():
+    while True:
+        key = input()[0]
+        if key == "w":
+            forward()
+        elif key == "s":
+            backward()
+        elif key == "a":
+            left()
+        elif key == "d":
+            right()
+        elif key == "e":
+            break
 
-    keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_w]:
-        forward()
-    elif keys[pygame.K_s]:
-        backward()
-    elif keys[pygame.K_a]:
-        left()
-    elif keys[pygame.K_d]:
-        right()
-    elif keys[pygame.K_e]:
-        run = False
+tk.Thread(target=input).start()
 
 pins.cleanup()
