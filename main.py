@@ -1,6 +1,6 @@
 import RPi.GPIO as pins
 import threading as tk
-import time
+import flask
 
 pins.setmode(pins.BCM)
 
@@ -38,21 +38,52 @@ def right():
 
 print("Press 'E' to exit!\nRunning...")
 
-def get_input():
-    while True:
-        key = input()[0]
-        if key == "w":
-            forward()
-        elif key == "s":
-            backward()
-        elif key == "a":
-            left()
-        elif key == "d":
-            right()
-        elif key == "e":
-            break
+def connect_to_mobile():
+    app = flask.Flask(__name__)
+    @app.route('/home')
+    def home():
+        return """<h1>Welcome to rovo 1.0 control panel</h1>
+        <h2>Use the buttons below to control the robot</h2>
+        <form action="/forward" method="post">
+        <input type="submit" value="Forward">
+        </form>
+        <form action="/backward" method="post">
+        <input type="submit" value="Backward">
+        </form>
+        <form action="/left" method="post">
+        <input type="submit" value="Left">
+        </form>
+        <form action="/right" method="post">
+        <input type="submit" value="Right">
+        </form>
+        <form action="/stop" method="post">
+        <input type="submit" value="Stop">
+        </form>
+        """
+    @app.route('/forward', methods=['POST'])
+    def forward():
+        forward()
+        return "Forward"
+    @app.route('/backward', methods=['POST'])
+    def backward():
+        backward()
+        return "Backward"
+    @app.route('/left', methods=['POST'])
+    def left():
+        left()
+        return "Left"
+    @app.route('/right', methods=['POST'])
+    def right():
+        right()
+        return "Right"
+    @app.route('/stop', methods=['POST'])
+    def stop():
+        pins.output(2, pins.LOW)
+        pins.output(3, pins.LOW)
+        return "Stop"
 
-time.sleep(1)
-tk.Thread(target=get_input).start()
+    host = '192.168.0.240'
+
+    app.run(host = host, port = 7045)
 
 pins.cleanup()
