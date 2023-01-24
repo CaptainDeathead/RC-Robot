@@ -11,29 +11,21 @@ def forward():
     pins.output(2, pins.HIGH)
     pins.output(3, pins.HIGH)
     print("Forward")
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.LOW)
 
 def backward():
     pins.output(2, pins.LOW)
     pins.output(3, pins.LOW)
     print("Backward")
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.LOW)
 
 def left():
     pins.output(2, pins.HIGH)
     pins.output(3, pins.LOW)
     print("Left")
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.LOW)
 
 def right():
     pins.output(2, pins.LOW)
     pins.output(3, pins.HIGH)
     print("Right")
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.LOW)
 
 print("Press 'E' to exit!\nRunning...")
 
