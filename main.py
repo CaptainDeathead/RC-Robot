@@ -63,7 +63,7 @@ def connect_to_mobile():
     @app.route('/forward', methods=['POST'])
     def forward():
         forward()
-        return """<form action="/home" method="post">"""
+        return "Home"
     @app.route('/backward', methods=['POST'])
     def backward():
         backward()
