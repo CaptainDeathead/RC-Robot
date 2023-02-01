@@ -1,30 +1,29 @@
-import RPi.GPIO as pins
+import PiRelay
 import flask
 
-pins.setmode(pins.BCM)
-
-# set up pins 2 and 3 as outputs
-pins.setup(2, pins.OUT)
-pins.setup(3, pins.OUT)
+r1 = PiRelay.Relay("RELAY1")
+r2 = PiRelay.Relay("RELAY2")
+r3 = PiRelay.Relay("RELAY3")
+r4 = PiRelay.Relay("RELAY4")
 
 def forward():
-    pins.output(2, pins.HIGH)
-    pins.output(3, pins.HIGH)
+    r1.on()
+    r2.on()
     print("Forward")
 
 def backward():
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.LOW)
+    r1.off()
+    r2.off()
     print("Backward")
 
 def left():
-    pins.output(2, pins.HIGH)
-    pins.output(3, pins.LOW)
+    r1.on()
+    r2.off()
     print("Left")
 
 def right():
-    pins.output(2, pins.LOW)
-    pins.output(3, pins.HIGH)
+    r1.off()
+    r2.on()
     print("Right")
 
 print("Press 'E' to exit!\nRunning...")
@@ -141,8 +140,7 @@ def connect_to_mobile():
         """
     @app.route('/handle_stop', methods=['POST'])
     def handle_stop():
-        pins.output(2, pins.LOW)
-        pins.output(3, pins.LOW)
+        backward()
         return """<h1>Welcome to rovo 1.0 control panel</h1>
         <h2>Use the buttons below to control the robot</h2>
         <h2>Robot stopped</h2>
@@ -168,5 +166,3 @@ def connect_to_mobile():
     app.run(host = host, port = 7045)
 
 connect_to_mobile()
-
-pins.cleanup()
